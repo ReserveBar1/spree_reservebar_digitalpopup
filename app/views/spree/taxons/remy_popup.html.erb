@@ -1,0 +1,6 @@
+<%= link_to 'View Cart', cart_path, style: 'text-align: right;' %>
+
+<% @products.each do |prod| %>
+  <p><%= prod.name %></p>
+<% end %>
+
