@@ -1,3 +1,3 @@
 Spree::OrdersController.class_eval do
-  layout :determine_layout, only: [:edit]
+  layout :determine_layout, only: [:edit, :show]
 end
