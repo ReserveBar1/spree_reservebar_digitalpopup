@@ -1,6 +1,11 @@
-<%= link_to 'View Cart', cart_path, style: 'text-align: right;' %>
+<%= link_to 'View Cart', cart_path %>
 
-<% @products.each do |prod| %>
-  <p><%= prod.name %></p>
+<% @products.each do |product| %>
+  <%= form_for :order, :url => populate_orders_url do |f| %>
+    <%= product.name %>
+    <%= hidden_field_tag "variants[#{product.master.id}]", 1 %>
+    <%= button_tag :class => 'large primary', :id => 'add-to-cart-button' do %>
+      <%= t(:add_to_cart) %>
+    <% end %>
+  <% end %>
 <% end %>
-
