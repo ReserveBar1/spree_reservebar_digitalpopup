@@ -5,6 +5,7 @@ Spree::TaxonsController.class_eval do
     brand = subdomain.split('-')[0]
 
     if brand == 'remy'
+      session.deep_merge!(params)
       @products = Spree::Brand.find_by_title('Remy Martin').products
       render 'remy_popup', layout: false
     elsif brand == 'macallan'
