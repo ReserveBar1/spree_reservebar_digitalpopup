@@ -25,6 +25,17 @@
   <% if controller.action_name == 'edit' %>
     <% @order.update_attributes(user_id: current_user.id) %>
   <% end %>
+<% elsif controller.controller_name == 'checkout' && controller.action_name == 'edit' %>
+  <% if @order.state == 'address' %>
+    <script>
+      $(function(){
+        $('#order_ship_address_attributes_firstname').val('<%= session[:first_name] %>')
+        $('#order_ship_address_attributes_lastname').val('<%= session[:last_name] %>')
+        $('#order_ship_address_attributes_zipcode').val('<%= session[:billing_zip] %>')
+        $('#order_ship_address_attributes_phone').val('<%= session[:billing_phone] %>')
+      });
+    </script>
+  <% end %>
 <% end %>
 
   <div id="fb-root"></div>
