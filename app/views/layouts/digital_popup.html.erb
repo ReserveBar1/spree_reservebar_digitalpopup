@@ -21,6 +21,12 @@
 
 <body>
 
+<% if controller.controller_name == 'orders' %>
+  <% if controller.action_name == 'edit' %>
+    <% @order.update_attributes(user_id: current_user.id) %>
+  <% end %>
+<% end %>
+
   <div id="fb-root"></div>
   <script>
     (function(d, s, id) {
