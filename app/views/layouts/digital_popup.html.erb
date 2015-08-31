@@ -24,6 +24,12 @@
 <% if controller.controller_name == 'orders' %>
   <% if controller.action_name == 'edit' %>
     <% @order.update_attributes(user_id: current_user.id) %>
+  <% elsif controller.action_name == 'show' %>
+    <% if flash[:commerce_tracking] %>
+      <script>
+        alert('<%= "EventID: #{session[:event_id]} & WristbandID: #{session[:wristband_id]}" %>')
+      </script>
+    <% end %>
   <% end %>
 <% elsif controller.controller_name == 'checkout' && controller.action_name == 'edit' %>
   <% if @order.state == 'address' %>
