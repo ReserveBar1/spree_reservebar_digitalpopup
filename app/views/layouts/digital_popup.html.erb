@@ -35,6 +35,12 @@
         $('#order_ship_address_attributes_phone').val('<%= session[:billing_phone] %>')
       });
     </script>
+  <% elsif @order.state == 'payment' %>
+    <script>
+      $(function(){
+        $('#name_on_card').val('<%= "#{session[:first_name]} #{session[:last_name]}" %>')
+      });
+    </script>
   <% end %>
 <% end %>
 
