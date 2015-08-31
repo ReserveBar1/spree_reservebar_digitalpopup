@@ -10,6 +10,8 @@ Spree::TaxonsController.class_eval do
       render 'remy_popup', layout: false
     elsif brand == 'macallan'
       render 'macallan_popup', layout: false
+    # elsif brand == 'macallan'
+    #   render 'macallan_popup', layout: 'false'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
