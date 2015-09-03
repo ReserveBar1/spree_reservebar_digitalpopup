@@ -23,7 +23,9 @@
 
 <% if controller.controller_name == 'orders' %>
   <% if controller.action_name == 'edit' %>
-    <% @order.update_attributes(user_id: current_user.id) %>
+    <% if current_user.present? %>
+      <% @order.update_attributes(user_id: current_user.id) %>
+    <% end %>
   <% elsif controller.action_name == 'show' %>
     <% if flash[:commerce_tracking] %>
       <script>

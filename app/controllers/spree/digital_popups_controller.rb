@@ -4,6 +4,7 @@ class Spree::DigitalPopupsController < Spree::BaseController
 
   def index
     session.deep_merge!(params)
+    guest_login if session[:user_email].present?
     if @brand == 'remy'
       render 'remy/index'
     else
@@ -30,6 +31,12 @@ class Spree::DigitalPopupsController < Spree::BaseController
   def get_brand
     subdomain = request.subdomain
     @brand = subdomain.split('-')[0]
+  end
+
+  def guest_login
+    user = Spree::User.anonymous!
+    user.update_attribute(:email, session[:user_email])
+    sign_in(:user, user)
   end
 
 end
