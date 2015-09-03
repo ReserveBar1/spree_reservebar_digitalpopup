@@ -1,10 +1,9 @@
 class Spree::DigitalPopupsController < Spree::BaseController
   layout 'digital_popup'
   before_filter :get_brand
+  before_filter :chomp_params, only: [:index, :products]
 
   def index
-    session.deep_merge!(params)
-    guest_login if session[:user_email].present?
     if @brand == 'remy'
       render 'remy/index'
     else
@@ -31,6 +30,11 @@ class Spree::DigitalPopupsController < Spree::BaseController
   def get_brand
     subdomain = request.subdomain
     @brand = subdomain.split('-')[0]
+  end
+
+  def chomp_params
+    session.deep_merge!(params)
+    guest_login if session[:user_email].present? and !current_user.present?
   end
 
   def guest_login
