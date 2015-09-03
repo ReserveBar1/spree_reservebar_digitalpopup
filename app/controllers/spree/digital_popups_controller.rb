@@ -1,25 +1,21 @@
-module Spree
-  class DigitalPopupsController < BaseController
-    layout :determine_layout
+class Spree::DigitalPopupsController < Spree::BaseController
+  layout 'digital_popup'
+  before_filter :get_brand
 
-    def index
-      subdomain = request.subdomain
-      brand = subdomain.split('-')[0]
-
-      if brand == 'remy'
-        session.deep_merge!(params)
-
-        # Logging in as Guest
-        user = Spree::User.anonymous!
-        user.update_attribute(:email, session[:user_email])
-        sign_in(:user, user)
-
-        @products = Spree::Brand.find_by_title('Remy Martin').products
-        render 'remy_popup'
-      else
-        raise ActionController::RoutingError.new('Not Found')
-      end
+  def index
+    session.deep_merge!(params)
+    if @brand == 'remy'
+      render 'remy/index'
+    else
+      raise ActionController::RoutingError.new('Not Found')
     end
-
   end
+
+  private
+
+  def get_brand
+    subdomain = request.subdomain
+    @brand = subdomain.split('-')[0]
+  end
+
 end
