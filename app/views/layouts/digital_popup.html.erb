@@ -7,6 +7,7 @@
 <!--[if gt IE 9]><!--><html lang="en"><!--<![endif]-->
 
 <head data-hook="inside_head">
+  <script type="text/javascript" src="https://dev.engage360.co/api/static/js/e360comm.js"></script>
   <%= render :partial => 'spree/shared/head' %>
   <%= render :partial => 'spree/shared/google_analytics_async' %>
   <%= twitter_card %>
@@ -21,36 +22,43 @@
 
 <body>
 
-<% if controller.controller_name == 'orders' %>
-  <% if controller.action_name == 'edit' %>
-    <% if current_user.present? %>
-      <% @order.update_attributes(user_id: current_user.id) %>
+  <% if controller.controller_name == 'orders' %>
+    <% if controller.action_name == 'edit' %>
+      <% if current_user.present? %>
+        <% @order.update_attributes(user_id: current_user.id) %>
+      <% end %>
+    <% elsif controller.action_name == 'show' %>
+      <% if flash[:commerce_tracking] %>
+        <% h = Hash.new %>
+        <% @order.line_items.map { |li| h[li.product.sku] = li.quantity } %>
+        <script>
+          e360comm.reserveBar(
+            'd34cf682-e9f1-4ab7-af46-4d9c1b2942a9',
+            '<%= session[:wristband_id] %>',
+            <%= session[:event_id] %>,
+            <%= h.to_json.html_safe %>
+          );
+        </script>
+      <% end %>
     <% end %>
-  <% elsif controller.action_name == 'show' %>
-    <% if flash[:commerce_tracking] %>
+  <% elsif controller.controller_name == 'checkout' && controller.action_name == 'edit' %>
+    <% if @order.state == 'address' %>
       <script>
-        alert('<%= "EventID: #{session[:event_id]} & WristbandID: #{session[:wristband_id]}" %>')
+        $(function(){
+          $('#order_ship_address_attributes_firstname').val('<%= session[:first_name] %>')
+          $('#order_ship_address_attributes_lastname').val('<%= session[:last_name] %>')
+          $('#order_ship_address_attributes_zipcode').val('<%= session[:billing_zip] %>')
+          $('#order_ship_address_attributes_phone').val('<%= session[:billing_phone] %>')
+        });
+      </script>
+    <% elsif @order.state == 'payment' %>
+      <script>
+        $(function(){
+          $('#name_on_card').val('<%= "#{session[:first_name]} #{session[:last_name]}" %>')
+        });
       </script>
     <% end %>
   <% end %>
-<% elsif controller.controller_name == 'checkout' && controller.action_name == 'edit' %>
-  <% if @order.state == 'address' %>
-    <script>
-      $(function(){
-        $('#order_ship_address_attributes_firstname').val('<%= session[:first_name] %>')
-        $('#order_ship_address_attributes_lastname').val('<%= session[:last_name] %>')
-        $('#order_ship_address_attributes_zipcode').val('<%= session[:billing_zip] %>')
-        $('#order_ship_address_attributes_phone').val('<%= session[:billing_phone] %>')
-      });
-    </script>
-  <% elsif @order.state == 'payment' %>
-    <script>
-      $(function(){
-        $('#name_on_card').val('<%= "#{session[:first_name]} #{session[:last_name]}" %>')
-      });
-    </script>
-  <% end %>
-<% end %>
 
   <div id="fb-root"></div>
   <script>
