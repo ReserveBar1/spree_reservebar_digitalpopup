@@ -1,5 +1,6 @@
 class Spree::DigitalPopupsController < Spree::BaseController
   layout 'digital_popup'
+  before_filter :not_checkout
   before_filter :get_brand
   before_filter :chomp_params, only: [:index, :products]
 
@@ -26,6 +27,10 @@ class Spree::DigitalPopupsController < Spree::BaseController
   end
 
   private
+
+  def not_checkout
+    @not_checkout = true
+  end
 
   def get_brand
     subdomain = request.subdomain

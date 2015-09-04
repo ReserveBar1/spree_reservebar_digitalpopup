@@ -16,11 +16,21 @@
   <meta name="bitly-verification" content="eeb2823bcf6f"/>
   <style>
     body { background: none; }
-    .container { box-shadow: none; }
+    .container { box-shadow: none; border: 5px solid rgba(164, 153, 99, 1.0); border-radius: 5px; margin-top: 70px;}
   </style>
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=416911481660452";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
 
   <% if controller.controller_name == 'orders' %>
     <% if controller.action_name == 'edit' %>
@@ -60,38 +70,56 @@
     <% end %>
   <% end %>
 
-  <div id="fb-root"></div>
-  <script>
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=416911481660452";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-  
-  
-  <div class="container">
-    <% unless (session[:age_gate] == 'passed' || request.path.include?('/pages/age_restriction')) %>
-      <% if session[:enable_age_gate] && (Spree::Config[:use_age_gate_on_all_pages] || Spree::AgeGate.apply_for_path?(request.path)) %>
-        <%= render :partial => 'spree/age_gate/modal_form' %>
+  <div style="background-color:#000000;<%= "text-align:center;".html_safe if @not_checkout %>">
+    <div style="vertical-align:top;padding:0;margin:0;width:100%;line-height:0px;text-align:center;">
+      <% if controller.action_name == 'index' %>
+        <img src="https://www.reservebar.com/spree/uploads/2242/original/firstPage_01.jpg?1441261308" alt="Rémy Martin Collection">
+      <% else %>
+        <img src="https://www.reservebar.com/spree/uploads/2247/original/header_01.jpg?1441261361" alt="Rémy Martin Logo">
       <% end %>
+    </div>
+
+    <div style="background:url(https://www.reservebar.com/spree/uploads/2243/original/firstPage_02.png?1441261319) no-repeat;padding:10px 0px;text-align:center;">
+      <h1 style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-style:italic;font-size:18px;line-height:18px;">#HeartOfCognac</h1>
+    </div>
+
+    <% if @not_checkout %>
+      <%= yield %>
+    <% else %>
+      <div class="container">
+        <% unless (session[:age_gate] == 'passed' || request.path.include?('/pages/age_restriction')) %>
+          <% if session[:enable_age_gate] && (Spree::Config[:use_age_gate_on_all_pages] || Spree::AgeGate.apply_for_path?(request.path)) %>
+            <%= render :partial => 'spree/age_gate/modal_form' %>
+          <% end %>
+        <% end %>
+
+        <div id="wrapper" class="row" data-hook>
+          <% if content_for?(:sidebar) %>
+          <aside id="sidebar" class="columns alpha four" data-hook>
+            <%= yield :sidebar %>
+          </aside>
+          <% end %>
+
+          <div id="content" class="columns omega <% if !content_for?(:sidebar) %> sixteen alpha <% else %> twelve <% end %>" data-hook>
+            <%= flash_messages %>
+            <%= yield %>
+          </div>
+
+        </div>
+      </div>
     <% end %>
 
-    <div id="wrapper" class="row" data-hook>
-      <% if content_for?(:sidebar) %>
-      <aside id="sidebar" class="columns alpha four" data-hook>
-        <%= yield :sidebar %>
-      </aside>
-      <% end %>
-
-      <div id="content" class="columns omega <% if !content_for?(:sidebar) %> sixteen alpha <% else %> twelve <% end %>" data-hook>
-        <%= flash_messages %>
-        <%= yield %>
-      </div>
-
+    <div style="text-align:center;line-height:0px;padding:70px 0px;">
+      <img src="https://www.reservebar.com/spree/uploads/2245/original/footer_01.png?1441261341" alt="Powered by ReserveBar">
+      <br>
+      <img src="https://www.reservebar.com/spree/uploads/2246/original/footer_02.png?1441261350" alt="ReserveBar.com">
     </div>
+
+    <% if controller.action_name == 'index' %>
+      <div style="text-align:center;padding:30px 40px 60px 40px;margin:0;">
+        <h1 style="font-family:Helvetica,Arial,sans-serif;color:#e8d089;font-weight:normal;font-size:12px;line-height:14px;">© 2015 E. Rémy Martin & Co., Imported by Rémy Cointreau USA, Inc., New York, NY.  All rights reserved, trademarks owned by E. Rémy Martin & Co.<br>PLEASE DRINK RESPONSIBLY.</h1>
+      </div>
+    <% end %>
   </div>
 
   <!--[if lt IE 9 ]>
