@@ -1,16 +1,47 @@
-<table>
-  <tr>
-    <% @products.each do |product| %>
-      <td>
-        <%= form_for :order, :url => populate_orders_url do |f| %>
-          <h4><%= product.name %></h4>
+<div style="vertical-align:top;padding:0px 0px 30px 0px;margin:0;width:100%;line-height:0px;">
+  <img src="https://www.reservebar.com/spree/uploads/2250/original/secondPage_01.jpg?1441261393" alt="Rémy Martin Collection">
+</div>
+
+<% @products.each do |product| %>
+  <div style="display:inline-block;vertical-align:top;padding:0px 15px;margin:0;text-align:center;">
+    <div style="width:235px;">
+
+      <% if product.permalink == 'remy-martin-vsop-1' %>
+        <img src="https://www.reservebar.com/spree/uploads/2251/original/secondPage_02_RemyMartinVSOP.jpg?1441261403" alt="Rémy Martin VSOP">
+        <br>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:27px;">RÉMY MARTIN V.S.O.P&#174;<br><br></p>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:18px;">750ml</p>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:14px;line-height:18px;padding:0px 30px;">Aged up to 14 years, elegant flavors of vanilla, ripe fruits and licorice.<br><br></p>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:48px;">$46</p>
+        <%= form_for :order, url: populate_orders_url do |f| %>
           <%= hidden_field_tag "variants[#{product.master.id}]", 1 %>
-          <br />
-          <%= button_tag :class => 'large primary', :id => 'add-to-cart-button' do %>
-            <%= t(:add_to_cart) %>
-          <% end %>
+          <%= image_submit_tag "https://www.reservebar.com/spree/uploads/2254/original/secondPage_05_btnAddToCart.png?1441261432", alt: "Add To Cart" %>
         <% end %>
-      </td>
-    <% end %>
-  </tr>
-</table>
+
+      <% elsif product.permalink == 'remy-martin-1738-accord-royal-custom-engraved-bottle' %>
+        <img src="https://www.reservebar.com/spree/uploads/2252/original/secondPage_03_RemyMartin1738.jpg?1441261413" alt="Rémy Martin 1738 Accord Royal Custom Engraved">
+        <br>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:27px;">RÉMY MARTIN 1738&#174; Accord Royal<br>Custom Engraved</p>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:18px;">750ml</p>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:14px;line-height:18px;padding:0px 30px;">Aged up to 20 years, aged in toasted French oak casks to reveal generous notes of toffee and spices.</p>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:48px;">$53</p>
+        <%= form_for :order, url: populate_orders_url do |f| %>
+          <%= hidden_field_tag "variants[#{product.master.id}]", 1 %>
+          <%= image_submit_tag "https://www.reservebar.com/spree/uploads/2254/original/secondPage_05_btnAddToCart.png?1441261432", alt: "Add To Cart" %>
+        <% end %>
+
+      <% elsif product.permalink == 'remy-martin-xo-excellence-custom-engraved' %>
+        <img src="https://www.reservebar.com/spree/uploads/2253/original/secondPage_04_RemyMartinXO.jpg?1441261423" alt="Rémy Martin XO Excellence Custom Engraved">
+        <br>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:27px;">RÉMY MARTIN&#174;<br>XO Excellence<br>Custom Engraved</p>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:18px;">750ml</p>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:14px;line-height:18px;padding:0px 30px;">Aged up to 30 years, opulent notes of candied fruits, hazelnut and jasmine.</p>
+        <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:48px;">$159</p>
+        <%= form_for :order, url: populate_orders_url do |f| %>
+          <%= hidden_field_tag "variants[#{product.master.id}]", 1 %>
+          <%= image_submit_tag "https://www.reservebar.com/spree/uploads/2254/original/secondPage_05_btnAddToCart.png?1441261432", alt: "Add To Cart" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

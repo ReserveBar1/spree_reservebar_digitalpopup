@@ -18,7 +18,7 @@ class Spree::DigitalPopupsController < Spree::BaseController
         'remy-martin-1738-accord-royal-custom-engraved-bottle',
         'remy-martin-xo-excellence-custom-engraved'
       ]
-      @products = Spree::Product.where(permalink: permalinks)
+      @products = Spree::Product.where(permalink: permalinks).order(:id)
       render 'remy/products'
     else
       raise ActionController::RoutingError.new('Not Found')
