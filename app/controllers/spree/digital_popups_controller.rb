@@ -26,6 +26,15 @@ class Spree::DigitalPopupsController < Spree::BaseController
     end
   end
 
+  def engraving
+    if @brand == 'remy'
+      @product = Spree::Variant.find_by_sku(params[:id]).product
+      render 'remy/engraving'
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   private
 
   def not_checkout
