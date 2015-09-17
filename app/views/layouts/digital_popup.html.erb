@@ -7,6 +7,7 @@
 <!--[if gt IE 9]><!--><html lang="en"><!--<![endif]-->
 
 <head data-hook="inside_head">
+  <meta charset="utf-8" />
   <script type="text/javascript" src="https://beta.engage360.co/api/static/js/e360comm.js"></script>
   <%= render :partial => 'spree/shared/head' %>
   <%= render :partial => 'spree/shared/google_analytics_async' %>
@@ -14,10 +15,7 @@
   <%= opengraph %>
   <meta property=”og:site_name” content=”ReserveBar”/>
   <meta name="bitly-verification" content="eeb2823bcf6f"/>
-  <style>
-    body { background: none; }
-    .container { box-shadow: none; border: 5px solid rgba(164, 153, 99, 1.0); border-radius: 5px; margin-top: 70px;}
-  </style>
+  <%= stylesheet_link_tag "digital_popup" %>
 </head>
 
 <body>
@@ -38,6 +36,16 @@
         <% @order.update_attributes(user_id: current_user.id) %>
       <% end %>
     <% elsif controller.action_name == 'show' %>
+      <script>
+        $(function(){
+          if (e360comm.isInApp) {
+            $('#back-to-app').show();
+            $('#back-to-app').click(function(){
+              e360.doCallback('GoNext'); // purchase is done, app may proceed
+            });
+          }
+        });
+      </script>
       <% if flash[:commerce_tracking] %>
         <% h = Hash.new %>
         <% @order.line_items.map { |li| h[li.product.sku] = li.quantity } %>
@@ -69,6 +77,10 @@
       </script>
     <% end %>
   <% end %>
+
+  <div id='back-to-app'>
+    DONE
+  </div>
 
   <div style="background-color:#000000;<%= "text-align:center;".html_safe if @not_checkout %>">
     <div style="vertical-align:top;padding:0;margin:0;width:100%;line-height:0px;text-align:center;">

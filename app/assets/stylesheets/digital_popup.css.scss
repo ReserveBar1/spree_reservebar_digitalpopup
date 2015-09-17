@@ -1,0 +1,28 @@
+body {
+  background: none;
+}
+
+.container {
+  box-shadow: none;
+  border: 5px solid rgba(164, 153, 99, 1.0);
+  border-radius: 5px;
+  margin-top: 70px;
+}
+
+#back-to-app {
+  display: none;
+  font-family: 'RemyMartin', serif;
+  background: rgba(196, 175, 108, 1.0);
+  color: rgba(104, 1, 15, 1.0);
+  position: absolute;
+  top: 142px;
+  right: 121px;
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 10;
+  padding: 25px 40px 20px 40px;
+  border-radius: 5px;
+  &:hover {
+    background: rgba(164, 153, 99, 1.0);
+  }
+}
