@@ -5,15 +5,15 @@
       <%= render :partial => 'spree/products/customization' %>
     </div>
     <% if @product.permalink == 'remy-martin-1738-accord-royal-custom-engraved-bottle'%>
-      <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:26px;line-height:27px; margin-top: 75px;">RÉMY MARTIN 1738&#174; Accord Royal<br>Custom Engraved Bottle</p>
+      <p style="font-family:RemyMartin,sans-serif;color:#c4af74;font-weight:normal;font-size:26px;line-height:27px; margin-top: 75px;">RÉMY MARTIN 1738&#174; Accord Royal<br>Custom Engraved Bottle</p>
     <% elsif @product.permalink == 'remy-martin-xo-excellence-custom-engraved' %>
-      <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:26px;line-height:27px; margin-top: 75px;">RÉMY MARTIN&#174; XO Excellence<br>Custom Engraved Plaque</p>
+      <p style="font-family:RemyMartin,sans-serif;color:#c4af74;font-weight:normal;font-size:26px;line-height:27px; margin-top: 75px;">RÉMY MARTIN&#174; XO Excellence<br>Custom Engraved Plaque</p>
     <% end %>
-    <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:26px;line-height:48px;"><%= number_to_currency @product.price %></p>
+    <p style="font-family:RemyMartin,sans-serif;color:#c4af74;font-weight:normal;font-size:26px;line-height:48px;"><%= number_to_currency @product.price %></p>
     <%= image_submit_tag "https://www.reservebar.com/spree/uploads/2254/original/secondPage_05_btnAddToCart.png?1441261432", alt: "Add To Cart" %>
   <% end %>
   <% if @product.permalink == 'remy-martin-xo-excellence-custom-engraved' %>
-    <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:48px; margin-top; 75px;">PLEASE NOTE: The engraving is done on a metal plate that adheres to the back of the bottle.</p>
+    <p style="font-family:RemyMartin,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:48px; margin-top; 75px;">PLEASE NOTE: The engraving is done on a metal plate that adheres to the back of the bottle.</p>
   <% end %>
-  <p style="font-family:Helvetica,Arial,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:48px; margin-top; 50px;">This product is only available for delivery in the following states: <%= @product.ships_to_states %></p>
+  <p style="font-family:RemyMartin,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:48px; margin-top; 50px;">This product is only available for delivery in the following states: <%= @product.ships_to_states %></p>
 </div>
