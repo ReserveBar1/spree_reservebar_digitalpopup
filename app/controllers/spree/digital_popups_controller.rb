@@ -2,6 +2,7 @@ class Spree::DigitalPopupsController < Spree::BaseController
   require 'httparty'
   layout :determine_layout
   before_filter :not_checkout
+  before_filter :get_brand
   before_filter :chomp_params, only: [:index, :products]
 
   def index
@@ -39,6 +40,11 @@ class Spree::DigitalPopupsController < Spree::BaseController
 
   def not_checkout
     @not_checkout = true
+  end
+
+  def get_brand
+    subdomain = request.subdomain
+    @brand = subdomain.split('-')[0]
   end
 
   def chomp_params
