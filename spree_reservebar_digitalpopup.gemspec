@@ -13,4 +13,6 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.has_rdoc = false
+
+  s.add_dependency 'httparty'
 end

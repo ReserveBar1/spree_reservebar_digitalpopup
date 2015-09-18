@@ -1,4 +1,5 @@
 class Spree::DigitalPopupsController < Spree::BaseController
+  require 'httparty'
   layout :determine_layout
   before_filter :not_checkout
   before_filter :chomp_params, only: [:index, :products]
@@ -43,12 +44,30 @@ class Spree::DigitalPopupsController < Spree::BaseController
   def chomp_params
     session.deep_merge!(params)
     guest_login if session[:user_email].present? and !current_user.present?
+    set_access_token
   end
 
   def guest_login
     user = Spree::User.anonymous!
     user.update_attribute(:email, session[:user_email])
     sign_in(:user, user)
+  end
+
+  def set_access_token
+    base_uri = 'https://beta.engage360.co/api/oauth/token'
+    options = {
+      body: {
+        grant_type: 'client_credentials',
+        client_id: 'co.engage360.reserveBar',
+        client_secret: 'H9lP30007IuG09050lLVgU23t'
+      }
+    }
+    begin
+      response = HTTParty.post(base_uri, options)
+      session[:access_token] = response['access_token']
+    rescue
+      session[:access_token] = 'communication_err'
+    end
   end
 
 end

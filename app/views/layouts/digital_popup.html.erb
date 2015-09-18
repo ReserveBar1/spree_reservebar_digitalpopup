@@ -49,9 +49,9 @@
         <% @order.line_items.map { |li| h[li.product.sku] = li.quantity } %>
         <script>
           e360comm.reserveBar(
-            'd34cf682-e9f1-4ab7-af46-4d9c1b2942a9',
-            '<%= session[:wristband_id] %>',
-            <%= session[:event_id] %>,
+            "<%= session[:access_token] %>",
+            "<%= session[:wristband_id] %>",
+            "<%= session[:event_id] %>",
             <%= h.to_json.html_safe %>
           );
         </script>
