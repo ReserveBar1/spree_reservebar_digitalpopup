@@ -10,5 +10,5 @@ Event ID => event_id
 Wristband ID => wristband_id  
 
 Example URL:  
-* http://remy-digitalpopup.reservebar.dev?first_name=Jane&last_name=Smith&user_email=customer@example.com&billing_zip=10001&billing_phone=2121234567&event_id=E123456&wristband_id=W987654
-* http://remy-digitalpopup.reservebar.dev/digital_popups/products?first_name=Jane&last_name=Smith&user_email=customer@example.com&billing_zip=10001&billing_phone=2121234567&event_id=E123456&wristband_id=W987654
+http://remy-digitalpopup.reservebar.dev?first_name=Jane&last_name=Smith&user_email=customer@example.com&billing_zip=10001&billing_phone=2121234567&event_id=E123456&wristband_id=W987654
+http://remy-digitalpopup.reservebar.dev/digital_popups/products?first_name=Jane&last_name=Smith&user_email=customer@example.com&billing_zip=10001&billing_phone=2121234567&event_id=E123456&wristband_id=W987654
