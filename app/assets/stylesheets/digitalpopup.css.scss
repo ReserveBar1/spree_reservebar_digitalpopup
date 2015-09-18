@@ -19,6 +19,20 @@
   font-style: italic;
 }
 
+@font-face {
+  font-family: 'Macallan';
+  src: font-url('gotham-book.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Macallan';
+  src: font-url('gotham-light.otf') format('opentype');
+  font-weight: lighter;
+  font-style: normal;
+}
+
 #remy-back-to-app {
   display: none;
   font-family: 'RemyMartin', serif;
