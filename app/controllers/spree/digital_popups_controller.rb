@@ -8,6 +8,8 @@ class Spree::DigitalPopupsController < Spree::BaseController
   def index
     if @brand == 'remy'
       render 'remy/index'
+    elsif @brand == 'macallan'
+      render 'macallan/index'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -22,6 +24,17 @@ class Spree::DigitalPopupsController < Spree::BaseController
       ]
       @products = Spree::Product.where(permalink: permalinks).order(:id)
       render 'remy/products'
+    elsif @brand == 'macallan'
+      permalinks = [
+        'the-macallan-fine-oak-10-years-old',
+        'the-macallan-sherry-oak-12-years-old',
+        'the-macallan-fine-oak-15-years-old',
+        'the-macallan-fine-oak-17-years-old',
+        'the-macallan-sherry-oak-18-years-old',
+        'the-macallan-rare-cask'
+      ]
+      @products = Spree::Product.where(permalink: permalinks).order(:id)
+      render 'macallan/products'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
