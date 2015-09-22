@@ -14,5 +14,5 @@ Gem::Specification.new do |s|
 
   s.has_rdoc = false
 
-  s.add_dependency 'httparty'
+  s.add_dependency 'httparty', '0.11.0'
 end
