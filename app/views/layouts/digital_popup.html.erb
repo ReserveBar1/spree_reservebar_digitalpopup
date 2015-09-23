@@ -8,10 +8,15 @@
 
 <head data-hook="inside_head">
   <meta charset="utf-8" />
-  <script type="text/javascript" src="https://beta.engage360.co/api/static/js/e360app.js"></script>
-  <script type="text/javascript" src="https://beta.engage360.co/api/static/js/e360comm.js"></script>
-  <%= render :partial => 'spree/shared/head' %>
-  <%= render :partial => 'spree/shared/google_analytics_async' %>
+  <% if Rails.env == 'production' %>
+    <script type="text/javascript" src="https://engage360.co/api/static/js/e360app.js"></script>
+    <script type="text/javascript" src="https://engage360.co/api/static/js/e360comm.js"></script>
+  <% else %>
+    <script type="text/javascript" src="https://beta.engage360.co/api/static/js/e360app.js"></script>
+    <script type="text/javascript" src="https://beta.engage360.co/api/static/js/e360comm.js"></script>
+  <% end %>
+  <%= render partial: 'spree/shared/head' %>
+  <%= render partial: 'spree/shared/google_analytics_async' %>
   <%= twitter_card %>
   <%= opengraph %>
   <meta property=”og:site_name” content=”ReserveBar”/>
@@ -93,7 +98,7 @@
   </script>
   <![endif]-->
 
-  <%= render :partial => 'spree/shared/columnizer_ie' %>
+  <%= render partial: 'spree/shared/columnizer_ie' %>
   <script type="text/javascript" src="/assets/store/bootstrap.js"></script>
   <script type="text/javascript">
     var touchClass = ('ontouchstart' in document.documentElement) ? 'touch' : 'no-touch';

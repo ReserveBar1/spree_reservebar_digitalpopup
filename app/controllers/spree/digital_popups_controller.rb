@@ -73,7 +73,11 @@ class Spree::DigitalPopupsController < Spree::BaseController
   end
 
   def set_access_token
-    base_uri = 'https://beta.engage360.co/api/oauth/token'
+    if Rails.env == 'production'
+      base_uri = 'https://engage360.co/api/oauth/token'
+    else
+      base_uri = 'https://beta.engage360.co/api/oauth/token'
+    end
     options = {
       body: {
         grant_type: 'client_credentials',
