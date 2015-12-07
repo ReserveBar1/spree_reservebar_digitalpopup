@@ -1,0 +1,56 @@
+<% if controller.controller_name == 'orders' && controller.action_name == 'show'%>
+  <div id='remy-back-to-app'>
+    DONE
+  </div>
+  <script>
+    $(function(){
+      if (e360comm.isInApp) {
+        $('#remy-back-to-app').show();
+        $('#remy-back-to-app').click(function(){
+          e360app.doCallback('GoNext'); // purchase is done, app may proceed
+        });
+      }
+    });
+  </script>
+<% end %>
+
+<div style="background-color:#000000;<%= "text-align:center;".html_safe if @not_checkout %>">
+  <% unless controller.action_name == 'engraving' %>
+    <div style="vertical-align:top;padding:0;margin:0;width:100%;line-height:0px;text-align:center;">
+      <img src="https://www.reservebar.com/spree/uploads/2640/original/Steoli_Header.png">
+    </div>
+  <% end %>
+
+  <% if @not_checkout %>
+    <%= yield %>
+  <% else %>
+    <div class="container">
+      <% unless (session[:age_gate] == 'passed' || request.path.include?('/pages/age_restriction')) %>
+        <% if session[:enable_age_gate] && (Spree::Config[:use_age_gate_on_all_pages] || Spree::AgeGate.apply_for_path?(request.path)) %>
+          <%= render :partial => 'spree/age_gate/modal_form' %>
+        <% end %>
+      <% end %>
+
+      <div id="wrapper" class="row" data-hook>
+        <% if content_for?(:sidebar) %>
+        <aside id="sidebar" class="columns alpha four" data-hook>
+          <%= yield :sidebar %>
+        </aside>
+        <% end %>
+
+        <div id="content" class="columns omega <% if !content_for?(:sidebar) %> sixteen alpha <% else %> twelve <% end %>" data-hook>
+          <%= flash_messages %>
+          <%= yield %>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+
+  <div style="text-align:center;line-height:0px;padding:70px 0px;">
+    <img src="https://www.reservebar.com/spree/uploads/2245/original/footer_01.png?1441261341" alt="Powered by ReserveBar">
+    <br>
+    <img src="https://www.reservebar.com/spree/uploads/2246/original/footer_02.png?1441261350" alt="ReserveBar.com">
+  </div>
+
+</div>

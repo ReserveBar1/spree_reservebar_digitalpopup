@@ -1,0 +1,30 @@
+<% @products.each do |product| %>
+  <div style="display:inline-block;vertical-align:top;padding:0px 15px;margin:0;text-align:center;">
+    <div style="width:235px;">
+
+      <% if product.permalink == 'elit-by-stolichnaya' %>
+        <img src="https://www.reservebar.com/spree/uploads/2642/original/slack-imgs.com.png">
+        <br>
+        <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:27px;">elit™ by Stolichnaya®<br><br></p>
+        <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:18px;">750ml</p>
+        <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:14px;line-height:18px;padding:0px 30px;">The ultra-luxury vodka with a single-minded pursuit of perfection</p>
+        <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:48px;">$59</p>
+        <%= form_for :order, url: populate_orders_url do |f| %>
+          <%= hidden_field_tag "variants[#{product.master.id}]", 1 %>
+          <%= image_submit_tag "https://www.reservebar.com/spree/uploads/2641/original/Stoli_AddtoCart.png", alt: "Add To Cart" %>
+        <% end %>
+
+      <% elsif product.permalink == 'elit-by-stolichnaya-custom-engraved-bottle' %>
+        <img src="https://www.reservebar.com/spree/uploads/2642/original/slack-imgs.com.png">
+        <br>
+        <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:27px;">elit™ by Stolichnaya®<br>Custom Engraved</p>
+        <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:18px;">750ml</p>
+        <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:14px;line-height:18px;padding:0px 30px;">The ultra-luxury vodka with a single-minded pursuit of perfection</p>
+        <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:24px;line-height:48px;">$69</p>
+        <%= link_to engraving_digital_popup_path(product.sku) do %>
+          <%= image_tag "https://www.reservebar.com/spree/uploads/2641/original/Stoli_AddtoCart.png", alt: "Add To Cart" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

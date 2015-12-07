@@ -1,0 +1,14 @@
+<div style='text-align:center; margin-top: 100px;'>
+  <%= form_for :order, url: populate_orders_url do |f| %>
+    <%= hidden_field_tag "variants[#{@product.master.id}]", 1 %>
+    <div style='width: 577px; margin: 0 auto;'>
+      <%= render :partial => 'spree/products/customization' %>
+    </div>
+    <% if @product.permalink == 'elit-by-stolichnaya-custom-engraved-bottle'%>
+      <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:26px;line-height:27px; margin-top: 75px;">elit™ by Stolichnaya®<br>Custom Engraved Bottle</p>
+    <% end %>
+    <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:26px;line-height:48px;"><%= number_to_currency @product.price %></p>
+    <%= image_submit_tag "https://www.reservebar.com/spree/uploads/2641/original/Stoli_AddtoCart.png", alt: "Add To Cart" %>
+  <% end %>
+  <p style="font-family:Macallan,sans-serif;color:#c4af74;font-weight:normal;font-size:18px;line-height:48px; margin-top; 50px;">This product is only available for delivery in the following states: <%= @product.ships_to_states %></p>
+</div>

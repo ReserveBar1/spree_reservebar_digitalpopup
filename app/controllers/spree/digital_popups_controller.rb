@@ -10,6 +10,8 @@ class Spree::DigitalPopupsController < Spree::BaseController
       render 'remy/index'
     elsif @brand == 'macallan'
       render 'macallan/index'
+    elsif @brand == 'stoli'
+      render 'stoli/index'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -35,6 +37,13 @@ class Spree::DigitalPopupsController < Spree::BaseController
       ]
       @products = Spree::Product.where(permalink: permalinks).order(:id)
       render 'macallan/products'
+    elsif @brand == 'stoli'
+      permalinks = [
+        'elit-by-stolichnaya',
+        'elit-by-stolichnaya-custom-engraved-bottle'
+      ]
+      @products = Spree::Product.where(permalink: permalinks).order(:id)
+      render 'stoli/products'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -44,6 +53,9 @@ class Spree::DigitalPopupsController < Spree::BaseController
     if @brand == 'remy'
       @product = Spree::Variant.find_by_sku(params[:id]).product
       render 'remy/engraving'
+    elsif @brand == 'stoli'
+      @product = Spree::Variant.find_by_sku(params[:id]).product
+      render 'stoli/engraving'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
