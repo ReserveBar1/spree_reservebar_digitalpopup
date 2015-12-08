@@ -1,4 +1,4 @@
-<div style='text-align:center; margin-top: 100px;'>
+<div style='text-align:center; padding-top: 100px;'>
   <%= form_for :order, url: populate_orders_url do |f| %>
     <%= hidden_field_tag "variants[#{@product.master.id}]", 1 %>
     <div style='width: 577px; margin: 0 auto;'>

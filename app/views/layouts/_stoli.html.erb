@@ -1,3 +1,7 @@
+<style>
+  body { background-color:#000000; }
+</style>
+
 <% if controller.controller_name == 'orders' && controller.action_name == 'show'%>
   <div id='remy-back-to-app'>
     DONE
@@ -15,7 +19,7 @@
 <% end %>
 
 <div style="background-color:#000000;<%= "text-align:center;".html_safe if @not_checkout %>">
-  <% unless controller.action_name == 'engraving' %>
+  <% unless controller.action_name == 'engraving' || !@not_checkout %>
     <div style="vertical-align:top;padding:0;margin:0;width:100%;line-height:0px;text-align:center;">
       <img src="https://www.reservebar.com/spree/uploads/2640/original/Steoli_Header.png">
     </div>
