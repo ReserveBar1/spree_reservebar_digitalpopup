@@ -69,6 +69,10 @@
         $(function(){
           $('#order_ship_address_attributes_firstname').val('<%= session[:first_name] %>')
           $('#order_ship_address_attributes_lastname').val('<%= session[:last_name] %>')
+          $('#order_ship_address_attributes_address1').val('<%= session[:ship_addr1] %>')
+          $('#order_ship_address_attributes_address2').val('<%= session[:ship_addr2] %>')
+          $('#order_ship_address_attributes_city').val('<%= session[:ship_city] %>')
+          $('#order_ship_address_attributes_state_id').val('<%= session[:state_id] %>')
           $('#order_ship_address_attributes_zipcode').val('<%= session[:billing_zip] %>')
           $('#order_ship_address_attributes_phone').val('<%= session[:billing_phone] %>')
         });

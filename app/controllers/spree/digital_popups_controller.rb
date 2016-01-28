@@ -74,6 +74,7 @@ class Spree::DigitalPopupsController < Spree::BaseController
 
   def chomp_params
     session.deep_merge!(params)
+    session[:state_id] = Spree::State.find_by_abbr(session[:ship_state]).id if session[:ship_state].present?
     guest_login if session[:user_email].present? and !current_user.present?
     set_access_token
   end
