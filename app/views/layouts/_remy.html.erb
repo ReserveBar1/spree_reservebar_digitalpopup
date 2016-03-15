@@ -1,12 +1,12 @@
 <% if controller.controller_name == 'orders' && controller.action_name == 'show'%>
-  <div id='remy-back-to-app'>
+  <div id='back-to-app'>
     DONE
   </div>
   <script>
     $(function(){
       if (e360comm.isInApp) {
-        $('#remy-back-to-app').show();
-        $('#remy-back-to-app').click(function(){
+        $('#back-to-app').show();
+        $('#back-to-app').click(function(){
           e360app.doCallback('GoNext'); // purchase is done, app may proceed
         });
       }

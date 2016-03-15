@@ -1,3 +1,19 @@
+<% if controller.controller_name == 'orders' && controller.action_name == 'show'%>
+  <div id='back-to-app'>
+    DONE
+  </div>
+  <script>
+    $(function(){
+      if (e360comm.isInApp) {
+        $('#back-to-app').show();
+        $('#back-to-app').click(function(){
+          e360app.doCallback('GoNext'); // purchase is done, app may proceed
+        });
+      }
+    });
+  </script>
+<% end %>
+
 <div style="background-color:#000000;">
   <div style="vertical-align:top;padding:0;margin:0;width:100%;line-height:0px;text-align:center;">
     <img src="https://www.reservebar.com/spree/uploads/2299/original/Macallan_header.png?1442471303" alt="Raise The Macallan">
