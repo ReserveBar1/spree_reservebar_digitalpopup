@@ -39,8 +39,7 @@
   background: rgba(196, 175, 108, 1.0);
   color: rgba(104, 1, 15, 1.0);
   position: absolute;
-  top: 0px;
-  right: 0px;
+  right: 5px;
   font-size: 28px;
   font-weight: bold;
   z-index: 10;
@@ -49,4 +48,16 @@
   &:hover {
     background: rgba(164, 153, 99, 1.0);
   }
+}
+
+.remy-back-to-app {
+  top: 5px;
+}
+
+.macallan-back-to-app {
+  top: 95px;
+}
+
+.stoli-back-to-app {
+  top: 5px
 }
